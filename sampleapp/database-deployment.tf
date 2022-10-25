@@ -53,17 +53,17 @@ resource "kubernetes_deployment" "ns-diary__database" {
 
           resources {}
 
-          volume_mount {
-            mount_path = "/var/lib/mysql"
-            name       = "db-pvc"
-          }
+          # volume_mount {
+          #   mount_path = "/var/lib/mysql"
+          #   name       = "db-pvc"
+          # }
         }
-        volume {
-          name = "db-pvc"
-          persistent_volume_claim {
-            claim_name = "${kubernetes_persistent_volume_claim.ns-diary__pvc-diary.metadata.0.name}"
-          }
-        }
+        # volume {
+        #   name = "db-pvc"
+        #   persistent_volume_claim {
+        #     claim_name = "${kubernetes_persistent_volume_claim.ns-diary__pvc-diary.metadata.0.name}"
+        #   }
+        # }
       }
     }
   }

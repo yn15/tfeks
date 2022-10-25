@@ -14,7 +14,7 @@ resource "kubernetes_service" "ns-diary__service-database" {
     port {
       port        = 8081
       protocol    = "TCP"
-      target_port = "8081"
+      target_port = "3306"
     }
   }
 
