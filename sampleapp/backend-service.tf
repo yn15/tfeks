@@ -1,21 +1,20 @@
 resource "kubernetes_service" "ns-diary__service-diary" {
 
   metadata {
-    name      = "service-diary"
+    name      = "backend"
     namespace = "ns-diary"
   }
 
   spec {
     selector = {
-      "app.kubernetes.io/name" = "app-diary"
+      "app.kubernetes.io/name" = "backend"
     }
 
-    type = "LoadBalancer"
-
+    type = "ClusterIP"
     port {
-      port        = 80
+      port        = 8081
       protocol    = "TCP"
-      target_port = "35001"
+      target_port = "8081"
     }
   }
 

@@ -1,10 +1,10 @@
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
 
-resource "kubernetes_deployment" "ns-diary__deployment-diary" {
+resource "kubernetes_deployment" "ns-diary__backend" {
 
   metadata {
-    name      = "deployment-diary"
+    name      = "backend"
     namespace = "ns-diary"
   }
 
@@ -12,7 +12,7 @@ resource "kubernetes_deployment" "ns-diary__deployment-diary" {
     replicas = 4
     selector {
       match_labels = {
-        "app.kubernetes.io/name" = "app-diary"
+        "app.kubernetes.io/name" = "backend"
       }
     }
     strategy {
@@ -27,7 +27,7 @@ resource "kubernetes_deployment" "ns-diary__deployment-diary" {
     template {
       metadata {
         annotations = {}
-        labels      = { "app.kubernetes.io/name" = "app-diary" }
+        labels      = { "app.kubernetes.io/name" = "backend" }
       }
 
       spec {
@@ -37,11 +37,11 @@ resource "kubernetes_deployment" "ns-diary__deployment-diary" {
         termination_grace_period_seconds = 30
 
         container {
-          image             = format("%s.dkr.ecr.%s.amazonaws.com/frontend:nolb", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
+          image             = format("%s.dkr.ecr.%s.amazonaws.com/backend:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
           image_pull_policy = "Always"
-          name              = "app-diary"
+          name              = "backend"
           port {
-            container_port = 35001
+            container_port = 8081
             protocol       = "TCP"
           }
 
@@ -51,6 +51,4 @@ resource "kubernetes_deployment" "ns-diary__deployment-diary" {
       }
     }
   }
-
-
 }
