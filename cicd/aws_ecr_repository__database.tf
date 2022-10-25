@@ -1,5 +1,5 @@
-resource "aws_ecr_repository" "db" {
-  name                 = "db"
+resource "aws_ecr_repository" "mariadb" {
+  name                 = "mariadb"
   image_tag_mutability = "MUTABLE"
   force_delete         = true
   image_scanning_configuration {

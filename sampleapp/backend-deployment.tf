@@ -1,6 +1,3 @@
-data "aws_region" "current" {}
-data "aws_caller_identity" "current" {}
-
 resource "kubernetes_deployment" "ns-diary__backend" {
 
   metadata {
@@ -37,7 +34,7 @@ resource "kubernetes_deployment" "ns-diary__backend" {
         termination_grace_period_seconds = 30
 
         container {
-          image             = format("%s.dkr.ecr.%s.amazonaws.com/backend:latest", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
+          image             = format("%s.dkr.ecr.%s.amazonaws.com/backend:nolb", data.aws_caller_identity.current.account_id, data.aws_region.current.name)
           image_pull_policy = "Always"
           name              = "backend"
           port {

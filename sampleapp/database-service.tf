@@ -1,13 +1,13 @@
-resource "kubernetes_service" "ns-diary__service-backend" {
+resource "kubernetes_service" "ns-diary__service-database" {
 
   metadata {
-    name      = "backend"
+    name      = "database"
     namespace = "ns-diary"
   }
 
   spec {
     selector = {
-      "app.kubernetes.io/name" = "backend"
+      "app.kubernetes.io/name" = "database"
     }
 
     type = "ClusterIP"

@@ -1,6 +1,5 @@
 data "aws_region" "current" {}
 data "aws_caller_identity" "current" {}
-
 resource "kubernetes_deployment" "ns-diary__frontend" {
 
   metadata {

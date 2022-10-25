@@ -1,4 +1,4 @@
-resource "kubernetes_service" "ns-diary__service-diary" {
+resource "kubernetes_service" "ns-diary__service-frontend" {
 
   metadata {
     name      = "frontend"
